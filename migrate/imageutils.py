@@ -159,14 +159,6 @@ class QemuImgInfo(object):
         return real_details
 
     def _parse(self, cmd_output):
-        # Analysis done of qemu-img.c to figure out what is going on here
-        # Find all points start with some chars and then a ':' then a newline
-        # and then handle the results of those 'top level' items in a separate
-        # function.
-        #
-        # TODO(harlowja): newer versions might have a json output format
-        #                 we should switch to that whenever possible.
-        #                 see: http://bit.ly/XLJXDX
         contents = {}
         lines = [x for x in cmd_output.splitlines() if x.strip()]
         while lines:
