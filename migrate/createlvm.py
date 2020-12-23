@@ -2,8 +2,8 @@
 # /usr/bin/env python
 
 import os
+import sys
 from oslo_concurrency import processutils
-
 
 def create_volume(volume_id, size_str):
     vg_name = 'vg_os'
@@ -31,24 +31,11 @@ def initialize_connection(volume_id, auth_user, auth_pass):
     except Exception as exp:
         print exp
 
+def main(argv):
+    lis = list()
+    lis.append(argv[1])
+    pass
 
-# def create_iscsi_target(volume_id, ip, userid="virtmig", password="virtmig", port=3260):
-#     lv_name = '/dev/vg_os/volume-%s' % volume_id
-#     # name = os.popen("cat /etc/iscsi/initiatorname.iscsi |awk -F'=' '{print $2}'|awk -F':' '{print $1}'")
-#     # target_name = name.read()
-#     # name.close()
-#     target_name = 'iqn.2010-10.org.openstack' + ":" + 'volume-%s' % volume_id
-#     try:
-#         optional_args = []
-#         optional_args.append('-p%s' % port)
-#         optional_args.append('-a%s' % ip)
-#         command_args = ['cinder-rtstool',
-#                         'create',
-#                         lv_name,
-#                         target_name,
-#                         userid,
-#                         password, ] + optional_args
-#         processutils.execute(*command_args, run_as_root=True)
-#     except Exception as err:
-#         print err
+if __name__ == '__main__':
+    main(sys.argv)
 
